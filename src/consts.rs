@@ -14,11 +14,11 @@
 // with this program; if not, write to the Free Software Foundation, Inc.,
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-pub const CHWD_CONFIG_FILE: &str = "profiles.toml";
-pub const CHWD_PCI_CONFIG_DIR: &str = "/var/lib/mhwd/db/pci/";
-pub const CHWD_PCI_DATABASE_DIR: &str = "/var/lib/mhwd/local/pci/";
-pub const CHWD_SCRIPT_PATH: &str = "/var/lib/mhwd/scripts/chwd";
+pub const RHWD_CONFIG_FILE: &str = "profiles.toml";
+pub const RHWD_PCI_CONFIG_DIR: &str = "/var/lib/mhwd/db/pci/";
+pub const RHWD_PCI_DATABASE_DIR: &str = "/var/lib/mhwd/local/pci/";
+pub const RHWD_SCRIPT_PATH: &str = "/var/lib/mhwd/scripts/rhwd";
 
-pub const CHWD_PM_CACHE_DIR: &str = "/var/cache/pacman/pkg";
-pub const CHWD_PM_CONFIG: &str = "/etc/pacman.conf";
-pub const CHWD_PM_ROOT: &str = "/";
+pub const RHWD_PM_CACHE_DIR: &str = "/var/cache/pacman/pkg";
+pub const RHWD_PM_CONFIG: &str = "/etc/pacman.conf";
+pub const RHWD_PM_ROOT: &str = "/";

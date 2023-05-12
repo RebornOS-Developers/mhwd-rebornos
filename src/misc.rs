@@ -84,11 +84,11 @@ pub fn check_nvidia_card() {
 pub fn check_environment() -> Vec<String> {
     let mut missing_dirs = vec![];
 
-    if !Path::new(consts::CHWD_PCI_CONFIG_DIR).exists() {
-        missing_dirs.push(consts::CHWD_PCI_CONFIG_DIR.to_owned());
+    if !Path::new(consts::RHWD_PCI_CONFIG_DIR).exists() {
+        missing_dirs.push(consts::RHWD_PCI_CONFIG_DIR.to_owned());
     }
-    if !Path::new(consts::CHWD_PCI_DATABASE_DIR).exists() {
-        missing_dirs.push(consts::CHWD_PCI_DATABASE_DIR.to_owned());
+    if !Path::new(consts::RHWD_PCI_DATABASE_DIR).exists() {
+        missing_dirs.push(consts::RHWD_PCI_DATABASE_DIR.to_owned());
     }
 
     missing_dirs

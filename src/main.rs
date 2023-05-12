@@ -81,7 +81,7 @@ fn main() -> anyhow::Result<()> {
     let args: Vec<String> = std::env::args().collect();
     if misc::get_current_cmdname(args[0].as_str()) == "mhwd" {
         console_writer::print_warning(
-            "'mhwd' is deprecated and will be removed in future. Please use 'chwd'",
+            "'mhwd' is deprecated and will be removed in future. Please use 'rhwd'",
         );
     }
 
@@ -304,7 +304,7 @@ pub fn run_script(
     profile: &Profile,
     transaction: Transaction,
 ) -> bool {
-    let mut cmd = format!("exec {}", consts::CHWD_SCRIPT_PATH);
+    let mut cmd = format!("exec {}", consts::RHWD_SCRIPT_PATH);
 
     if Transaction::Remove == transaction {
         cmd.push_str(" --remove");
@@ -445,7 +445,7 @@ fn install_profile(data: &mut data::Data, args: &args::Args, profile: &Profile) 
         return misc::Status::ErrorScriptFailed;
     }
 
-    let db_dir = consts::CHWD_PCI_DATABASE_DIR;
+    let db_dir = consts::RHWD_PCI_DATABASE_DIR;
     let working_dir = format!(
         "{}/{}",
         db_dir,
@@ -453,7 +453,7 @@ fn install_profile(data: &mut data::Data, args: &args::Args, profile: &Profile) 
     );
     let _ = fs::create_dir_all(&working_dir);
     if !profile::write_profile_to_file(
-        &format!("{}/{}", &working_dir, consts::CHWD_CONFIG_FILE),
+        &format!("{}/{}", &working_dir, consts::RHWD_CONFIG_FILE),
         profile,
     ) {
         return misc::Status::ErrorSetDatabase;

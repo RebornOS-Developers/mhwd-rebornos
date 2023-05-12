@@ -1,0 +1,97 @@
+# Maintainer: shivanandvp <shivanandvp@rebornos.org>
+
+pkgname=mhwd-rebornos-git
+pkgver=0.8.0
+pkgrel=1
+
+arch=('x86_64' 'aarch64')
+pkgdesc='Hardware Detection for RebornOS. Please also install mhwd-db-rebornos.'
+url='https://github.com/RebornOS-Developers/mhwd-rebornos'
+license=('GPL3')
+depends=('gcc-libs' 'pciutils' 'lua' 'pacman')
+optdepends=('mhwd-db-rebornos')
+provides=('mhwd')
+conflicts=('mhwd-rebornos-local' 'mhwd-rebornos-git' 'mhwd' 'mhwd-cachyos' 'mhwd-garuda')
+sha256sums=('SKIP')
+makedepends=('git' 'cargo' 'mold' 'clang' 'llvm')
+
+source=("git+https://github.com/RebornOS-Developers/mhwd-rebornos")             
+
+pkgver() {
+    (   cd "${srcdir}/mhwd-rebornos"
+        set -o pipefail
+        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+prepare() {
+    PROJECT_DIRECTORY="${srcdir}/mhwd-rebornos"
+    # RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
+    # NUMBER_OF_PROCESSORS="$(nproc)"
+    # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
+    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB" 
+
+    cd "$PROJECT_DIRECTORY"
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+
+    cd "$PROJECT_DIRECTORY/scripts/rhwd-kernel"
+    cargo fetch --locked --target "$CARCH-unknown-linux-gnu"
+}
+
+build() {     
+    PROJECT_DIRECTORY="${srcdir}/mhwd-rebornos"
+    # RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
+    # NUMBER_OF_PROCESSORS="$(nproc)"
+    # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
+    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB" 
+
+    # Compile with clang
+    export AR=llvm-ar
+    export CC=clang
+    export CXX=clang++
+    export NM=llvm-nm
+    export RANLIB=llvm-ranlib     
+
+    export RUSTFLAGS="-Cembed-bitcode -C opt-level=3 -Ccodegen-units=1 -Clinker=clang -C link-arg=-flto -Clink-arg=-fuse-ld=/usr/bin/mold"
+
+    cd "$PROJECT_DIRECTORY/scripts/rhwd-kernel"
+    cargo build --release --frozen
+
+    cd "$PROJECT_DIRECTORY"
+    cargo build --release --frozen
+}
+
+package() {
+    PROJECT_DIRECTORY="${srcdir}/mhwd-rebornos"
+    # RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
+    # NUMBER_OF_PROCESSORS="$(nproc)"
+    # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
+    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB" 
+
+    # To bypass makepkg's dependency check during build-time
+    depends+=('mhwd-db')
+
+    cd "$PROJECT_DIRECTORY"
+
+    install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/rhwd/LICENSE"
+
+    install -Dm755 "target/release/rhwd" "$pkgdir/usr/bin/rhwd"
+    ln -s "/usr/bin/rhwd" "$pkgdir/usr/bin/mhwd"
+    install -Dm755 scripts/rhwd "$pkgdir"/var/lib/mhwd/scripts/rhwd
+
+    install -Dm644 target/release/build/rhwd-*/out/rhwd.bash "$pkgdir/usr/share/bash-completion/completions/rhwd"
+    install -Dm644 target/release/build/rhwd-*/out/rhwd.fish "$pkgdir/usr/share/fish/vendor_completions.d/rhwd.fish"
+    install -Dm644 target/release/build/rhwd-*/out/_rhwd "$pkgdir/usr/share/zsh/site-functions/_rhwd"
+
+    install -d -m755 "$pkgdir"/var/lib/mhwd/{db,local}/pci
+
+    cd scripts/rhwd-kernel
+    install -Dm755 "target/release/rhwd-kernel" "$pkgdir/usr/bin/rhwd-kernel"
+}

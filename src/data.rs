@@ -60,14 +60,14 @@ impl Data {
     }
 
     fn fill_installed_profiles(&mut self) {
-        let conf_path = crate::consts::CHWD_PCI_DATABASE_DIR;
+        let conf_path = crate::consts::RHWD_PCI_DATABASE_DIR;
         let configs = &mut self.installed_pci_profiles;
 
         fill_profiles(configs, &mut self.invalid_profiles, conf_path);
     }
 
     fn fill_all_profiles(&mut self) {
-        let conf_path = crate::consts::CHWD_PCI_CONFIG_DIR;
+        let conf_path = crate::consts::RHWD_PCI_CONFIG_DIR;
         let configs = &mut self.all_pci_profiles;
 
         fill_profiles(configs, &mut self.invalid_profiles, conf_path);
@@ -97,7 +97,7 @@ fn fill_profiles(
         let config_file_path = format!(
             "{}/{}",
             entry.as_ref().unwrap().path().as_os_str().to_str().unwrap(),
-            crate::consts::CHWD_CONFIG_FILE
+            crate::consts::RHWD_CONFIG_FILE
         );
         if !Path::new(&config_file_path).exists() {
             continue;

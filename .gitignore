@@ -35,3 +35,10 @@ target
 *.exe
 *.out
 *.app
+
+# Packaging
+packaging/**/pkg
+packaging/**/src
+packaging/**/*.tar.*
+packaging/**/mhwd-rebornos-git/mhwd-rebornos
+packaging/**/mhwd-rebornos/mhwd-rebornos

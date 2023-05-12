@@ -6,8 +6,8 @@ authors = ["Vladislav Nepogodin <nepogodin.vlad@gmail.com>"]
 license = "GPLv3"
 
 description = "Raw bindings for libpci"
-homepage = "https://github.com/CachyOS/mhwd-cachyos"
-repository = "https://github.com/CachyOS/mhwd-cachyos"
+homepage = "https://github.com/RebornOS-Developers/mhwd-rebornos"
+repository = "https://github.com/RebornOS-Developers/mhwd-rebornos"
 categories = ["api-bindings"]
 
 [dependencies]

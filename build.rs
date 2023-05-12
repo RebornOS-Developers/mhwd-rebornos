@@ -11,6 +11,6 @@ fn main() {
 
     let mut command = Args::command();
     for shell in [Shell::Bash, Shell::Fish, Shell::Zsh] {
-        generate_to(shell, &mut command, "chwd", &out_path).expect("Couldn't generate completion!");
+        generate_to(shell, &mut command, "rhwd", &out_path).expect("Couldn't generate completion!");
     }
 }
