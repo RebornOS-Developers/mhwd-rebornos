@@ -41,7 +41,7 @@ sh scripts/build.sh
 ```
 
 ### 2. Run
-Change to the project directory (`cd mhwd-rebornos`) and run the below. You can specify any commandline parameters to `calamares` by passing it to the below script
+Change to the project directory (`cd mhwd-rebornos`) and run the below. You can specify any commandline parameters to `mhwd-rebornos` by passing it to the below script
 
 ```bash
 sh scripts/run.sh
@@ -63,18 +63,18 @@ Change to the project directory (`cd mhwd-rebornos`) and run any of the below sc
 
 ## Updating
 
-To keep this project in sync with the upstream Calamares source, please follow the below steps. Change to the project directory (`cd mhwd-rebornos`) before continuing...
+To keep this project in sync with the upstream `mhwd-cachyos` source, please follow the below steps. Change to the project directory (`cd mhwd-rebornos`) before continuing...
 
-1. **Fetch changes from the upstream Github source**: The below script clones the [upstream Calamares source](https://github.com/calamares/calamares) to the `calamares` branch (force overwrites it).
+1. **Fetch changes from the upstream Github source**: The below script clones the [upstream `mhwd-cachyos` source](https://github.com/CachyOS/mhwd-cachyos) to the `mhwd` branch (force overwrites it).
 ```sh
-sh scripts/update-calamares-branch.sh
+sh scripts/update-mhwd-branch.sh
 ```
 
 2. **Merge upstream changes**
 ```sh
 git checkout main
 
-git merge calamares
+git merge mhwd
 ```
 
 3. **Manually handle merge conflicts**: Follow [this guide for commandline operations](https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts) or [this guide if you are using *Visual Studio Code*](https://code.visualstudio.com/docs/sourcecontrol/overview#_merge-conflicts).

@@ -23,7 +23,7 @@ prepare() {
     BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
     # NUMBER_OF_PROCESSORS="$(nproc)"
     # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
-    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # TARGET_DIRECTORY_STUB="var/lib/mhwd"
     # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB" 
 
     cd "$PROJECT_DIRECTORY"
@@ -39,7 +39,7 @@ build() {
     BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
     # NUMBER_OF_PROCESSORS="$(nproc)"
     # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
-    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # TARGET_DIRECTORY_STUB="var/lib/mhwd"
     # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB"
 
     # Compile with clang
@@ -64,7 +64,7 @@ package() {
     BUILD_DIRECTORY="$PROJECT_DIRECTORY/target"
     # NUMBER_OF_PROCESSORS="$(nproc)"
     # NUMBER_OF_PROCESSORS="$(($NUMBER_OF_PROCESSORS-1))"
-    # TARGET_DIRECTORY_STUB="etc/calamares"
+    # TARGET_DIRECTORY_STUB="var/lib/mhwd"
     # DIST_DIRECTORY="$PROJECT_DIRECTORY/$TARGET_DIRECTORY_STUB" 
 
     # To bypass makepkg's dependency check during build-time
