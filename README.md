@@ -67,7 +67,7 @@ To keep this project in sync with the upstream `mhwd-cachyos` source, please fol
 
 1. **Fetch changes from the upstream Github source**: The below script clones the [upstream `mhwd-cachyos` source](https://github.com/CachyOS/mhwd-cachyos) to the `mhwd` branch (force overwrites it).
 ```sh
-sh scripts/update-mhwd-branch.sh
+sh scripts/update_mhwd_branch.sh
 ```
 
 2. **Merge upstream changes**
