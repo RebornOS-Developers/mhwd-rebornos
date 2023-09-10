@@ -57,7 +57,7 @@ Change to the project directory (`cd mhwd-rebornos`) and run any of the below sc
 - where `<MODE>` can be one of the below
      1. `local`: Selects *mhwd-rebornos-local* from the local project that you have cloned already.
      2. `git`: Selects *mhwd-rebornos-git* from the latest git commit.
-     3. `stable`: Selects *mhwd-rebornos* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/mhwd-rebornos/blob/main/packaging/mhwd-rebornos/PKGBUILD#L4). If `pkgver=3.3.0_alpha2_2`, then the git tag `v3.3.0_alpha2_2` is used for packaging. 
+     3. `stable`: Selects *mhwd-rebornos* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/mhwd-rebornos/blob/main/packaging/mhwd-rebornos/PKGBUILD#L5). If `pkgver=0.0.1`, then the git tag `v0.0.1` is used for packaging. 
      
 > **Note**: Any additional parameters passed to the above scripts are automatically sent to `makepkg` or `pacman` (whichever is applicable).
 
